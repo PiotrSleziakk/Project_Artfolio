@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project Artfolio - Usuń Obraz{% endblock %}
+
+{% block content %}
+    <h1>Usuń Obraz(y)</h1>
+
+    {% if artworks is empty %}
+        <p>Nie masz żadnych obrazów do usunięcia.</p>
+    {% else %}
+        <div class="artworks-gallery">
+            {% for artwork in artworks %}
+                <div class="artwork-item">
+                    <img src="{{ asset('images/fulls/thumbs/' ~ artwork.artworkImage) }}" alt="{{ artwork.artworkName }}" width="100">
+                    <p>{{ artwork.artworkName }}</p>
+                    <a href="{{ path('app_profile_delete_artwork_confirm', {id: artwork.id}) }}" class="btn btn-danger">Usuń</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <a href="{{ path('app_profile') }}">Powrót do profilu</a>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/fontawesome-all.min.css') }}">
+    <noscript><link rel="stylesheet" href="{{ asset('css/noscript.css') }}"></noscript>
+    <style>
+        .artworks-gallery {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .artwork-item {
+            margin: 10px;
+            text-align: center;
+        }
+        .artwork-item img {
+            display: block;
+            margin: 0 auto 10px;
+        }
+        .artwork-item p {
+            margin: 5px 0;
+        }
+        .artwork-item .btn {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+{% endblock %}

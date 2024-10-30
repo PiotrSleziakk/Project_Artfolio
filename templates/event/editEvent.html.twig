@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Edytuj wydarzenie</h1>
+    {{ form_start(eventForm) }}
+        {{ form_widget(eventForm) }}
+        <button class="btn">Zapisz zmiany</button>
+    {{ form_end(eventForm) }}
+{% endblock %}

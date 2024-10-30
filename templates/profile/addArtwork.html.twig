@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project Artfolio - Dodaj nowe dzieło{% endblock %}
+
+{% block body %}
+    <h1>Dodaj nowe dzieło</h1>
+
+    {{ form_start(form, {'attr': {'class': 'form-horizontal', 'enctype': 'multipart/form-data'}}) }}
+
+    {{ form_row(form.artworkName, {'label': 'Nazwa dzieła'}) }}
+    {{ form_row(form.artworkDescription, {'label': 'Opis dzieła'}) }}
+    
+    {# Pole pliku powinno być renderowane jako "form_widget" z odpowiednim atrybutem "type" #}
+    <div class="form-group">
+        <label for="{{ form.artworkImage.vars.id }}" class="col-sm-3 control-label">Zdjęcie dzieła</label>
+        <div class="col-sm-9">
+            {{ form_widget(form.artworkImage, {'attr': {'class': 'form-control', 'type': 'file'}}) }}
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block container %}
+    <h1>Oto twój album!</h1>
+    {% if artworks is empty %}
+        <p>Nie masz żadnych obrazów do usunięcia.</p>
+    {% else %}
+        <div class="artworks-gallery">
+            {% for artwork in artworks %}
+                <div class="artwork-item">
+                    <img src="{{ asset('images/fulls/thumbs/' ~ artwork.artworkImage) }}" alt="{{ artwork.artworkName }}" width="100">
+                    <p>{{ artwork.artworkName }}</p>
+                    
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/fontawesome-all.min.css') }}">
+    <noscript><link rel="stylesheet" href="{{ asset('css/noscript.css') }}"></noscript>
+    <style>
+        .artworks-gallery {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .artwork-item {
+            margin: 10px;
+            text-align: center;
+        }
+        .artwork-item img {
+            display: block;
+            margin: 0 auto 10px;
+        }
+        .artwork-item p {
+            margin: 5px 0;
+        }
+        .artwork-item .btn {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+{% endblock %}

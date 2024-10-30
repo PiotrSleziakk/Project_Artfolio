@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project Artfolio - Lista użytkowników{% endblock %}
+
+{% block body %}
+    <h1 style='text-align: center'>Oto lista użytkowników.</h1>
+{% endblock %}    
+
+{% block content %}
+    <h1 style='font-size: 24px; margin-left: 5em; text-align: center; color: #000000'>Lista użytkowników</h1>
+    <table style='margin-left: 5em; color: #000000' class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles|join(', ') }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_reset_password', {id: user.id}) }}" class="btn btn-primary">Zresetuj hasło </a>
+                        <a href="{{ path('app_admin_manage_roles', {id: user.id}) }}" class="btn btn-secondary">Zarządzaj rolą </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

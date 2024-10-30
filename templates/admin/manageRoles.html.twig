@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project Artfolio - Zarządzaj rolami{% endblock %}
+
+{% block body %}
+    <h1>Zarządzaj rolami użytkownika: {{ user.email }}</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="roles">Role</label>
+            <select id="roles" name="roles[]" class="form-control" multiple>
+                <option value="ROLE_USER" {% if 'ROLE_USER' in user.roles %}selected{% endif %}>ROLE_USER</option>
+                <option value="ROLE_MODERATOR" {% if 'ROLE_MODERATOR' in user.roles %}selected{% endif %}>ROLE_MODERATOR</option>
+                <option value="ROLE_ADMIN" {% if 'ROLE_ADMIN' in user.roles %}selected{% endif %}>ROLE_ADMIN</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Zaktualizuj rolę</button>
+    </form>
+{% endblock %}

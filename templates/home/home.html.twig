@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project_Artfolio - Witamy{% endblock %}
+
+{% block body %}
+    <h1 align="center">Witamy w Project Artfolio!</h1>
+    <p align="center">To jest nasza aplikacja, która umożliwia użytkownikom tworzenie, przeglądanie i zarządzanie portfolio artystycznym.</p>
+    <p align="center"><a href="{{ path('app_login') }}">Zaloguj się</a> lub <a href="{{ path('app_register') }}">zarejestruj</a>, aby zacząć korzystać z aplikacji.</p>
+{% endblock %}

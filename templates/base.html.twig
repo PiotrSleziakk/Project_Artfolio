@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<!--
+	Lens by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <title>{% block title %}Project Artfolio{% endblock %}</title>
+        
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/fontawesome-all.min.css') }}">
+            <noscript><link rel="stylesheet" href="{{ asset('css/noscript.css') }}"></noscript>
+        {% endblock %}
+
+        
+    </head>
+    <body class="is-preload-0 is-preload-1 is-preload-2">
+        <div id="main">
+            <header id="header">
+                <h1 align="center">Project Artfolio</h1>
+                    <ul align="center" class="icons">
+                        <li><a href="{{ path('app_event') }}" ><span class="label"><img src="{{ asset('webfonts/calendar-regular.svg') }}" alt="Event Icon" style="width: 20px; height: 20px;"></span></a></li>
+                        {% if app.user %}
+                            <li><a href="{{ path('app_user_panel') }}" ><span class="label"><img src="{{ asset('webfonts/gear-solid.svg') }}" alt="User Panel Icon" style="width: 20px; height: 20px;"></span></a></li>
+                            <li><a href="{{ path('app_profile') }}" ><span class="label"><img src="{{ asset('webfonts/user-solid.svg') }}" alt="Profile Icon" style="width: 20px; height: 20px;"></span></a></li>
+                            <li><a href="{{ path('app_user_search') }}" ><span class="label"><img src="{{ asset('webfonts/search-icon.svg') }}" alt="Search Icon" style="width: 20px; height: 20px;"></span></a></li>
+                            {% if 'ROLE_ADMIN' in app.user.roles %}
+                                <li><a href="{{ path('app_admin_dashboard') }}" ><span class="label"><img src="{{ asset('webfonts/user-secret-solid.svg') }}" alt="Admin Panel Icon" style="width: 20px; height: 20px;"></span></a></li>
+                            {% endif %}
+
+                            <li class="nav-item"><a href="{{ path('app_logout') }}">Wyloguj</a></li>
+                        {% else %}
+                            <li class="nav-item"><a href="{{ path('app_register') }}">Zarejestruj</a></li>
+                            <li class="nav-item"><a href="{{ path('app_login') }}">Zaloguj</a></li>
+                        {% endif %}
+                    </ul>
+            </header>
+                    
+            {% block javascripts %}
+                <script src="{{ asset('js/jquery.min.js') }}"></script>
+                <script src="{{ asset('js/browser.min.js') }}"></script>
+                <script src="{{ asset('js/breakpoints.min.js') }}"></script>
+                <script src="{{ asset('js/main.js') }}"></script>
+                <script>
+                // Sprawdzenie aktualnego URL
+                if (window.location.pathname !== '/profile') {
+                    main.$viewer.remove();
+                }
+                </script>
+            {% endblock %}
+            <main>
+                {% block body %}{% endblock %}
+            </main>
+
+            <footer id="footer">
+                <p align="center">Project Artfolio by Piotr Śleziak</p>
+            </footer>
+        </div>
+            
+        <div id="container">
+            {% block content %}{% endblock %}
+        </div>
+            
+        
+    </body>
+</html>

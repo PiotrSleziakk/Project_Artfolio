@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project_Artfolio - Mój Profil{% endblock %}
+
+{% block body %}
+    <p align="center">Witaj {{ app.user.email }}!</p>
+    <p align="center">Oto twoja galeria</p>
+    <p align="center"><a align="center" href="{{ path('app_profile_add_artwork') }}">Dodaj swoje dzieło!</a></p>
+    <p align="center"><a href="{{ path('app_profile_delete_artwork') }}" class="btn btn-danger">Usuń obrazy</a></p>
+    
+    <section id="thumbnails">
+        {% for artwork in artworks %}
+            <article>
+                <a class="thumbnail" href="{{ asset('images/fulls/fulls/' ~ artwork.artworkImage) }}" data-position="left center">
+                    <img src="{{ asset('images/fulls/thumbs/' ~ artwork.artworkImage) }}" alt="" />
+                </a>
+                <h2>{{ artwork.artworkName }}</h2>
+                <p>{{ artwork.artworkDescription }}</p>
+            </article>
+        {% endfor %}
+    </section>
+   
+    
+    {% block javascripts %}
+            <script src="{{ asset('js/jquery.min.js') }}"></script>
+            <script src="{{ asset('js/browser.min.js') }}"></script>
+            <script src="{{ asset('js/breakpoints.min.js') }}"></script>
+            <script src="{{ asset('js/main.js') }}"></script>
+    {% endblock %}
+{% endblock %}

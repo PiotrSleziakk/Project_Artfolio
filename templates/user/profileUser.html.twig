@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project_Artfolio - Profil Użytkownika {{ user.email }} {% endblock %}
+
+{% block body %}
+    <p align="center">Oto galeria użytkownika:{{ user.email }}!</p>
+    
+    <section id="thumbnails">
+        {% for artwork in artworks %}
+            <article>
+                <a class="thumbnail" href="{{ asset('images/fulls/fulls/' ~ artwork.artworkImage) }}" data-position="left center">
+                    <img src="{{ asset('images/fulls/thumbs/' ~ artwork.artworkImage) }}" alt="" />
+                </a>
+                <h2>{{ artwork.artworkName }}</h2>
+                <p>{{ artwork.artworkDescription }}</p>
+            </article>
+        {% else %}
+            <p>Użytkownik nie ma jeszcze żadnych dzieł.</p>
+        {% endfor %}
+    </section>
+   
+    
+    {% block javascripts %}
+            <script src="{{ asset('js/jquery.min.js') }}"></script>
+            <script src="{{ asset('js/browser.min.js') }}"></script>
+            <script src="{{ asset('js/breakpoints.min.js') }}"></script>
+            <script src="{{ asset('js/main.js') }}"></script>
+    {% endblock %}
+{% endblock %}

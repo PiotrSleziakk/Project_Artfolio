@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project Artfolio - Panel użytkownika{% endblock %}
+
+{% block body %}
+    <h1>Panel użytkownika</h1>
+    <p>Witaj, {{ user.email }}</p>
+    <ul>
+        <li><a href="javascript:void(0)" onclick="toggleForm('changePasswordForm')">Zmień hasło</a></li>
+        <li><a href="javascript:void(0)" onclick="toggleForm('changeEmailForm')">Zmień Email</a></li>
+    </ul>
+
+    <div id="changePasswordForm" style="display: none;">
+        <form action="{{ path('app_change_password') }}" method="post">
+            <input type="password" name="current_password" placeholder="Aktualne hasło" required>
+            <input type="password" name="new_password" placeholder="Nowe hasło" required>
+            <input type="password" name="confirm_password" placeholder="Potwierdź nowe hasło" required>
+            <button type="submit">Zmień hasło</button>
+        </form>
+    </div>
+
+    <div id="changeEmailForm" style="display: none;">
+        <form action="{{ path('app_change_email') }}" method="post">
+            <input type="email" name="newEmail" placeholder="Nowy adres e-mail" required>
+            <input type="email" name="confirmNewEmail" placeholder="Potwierdź nowy adres e-mail" required>
+            <button type="submit">Zmień e-mail</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleForm(formId) {
+            var form = document.getElementById(formId);
+            if (form.style.display === "none") {
+                form.style.display = "block";
+            } else {
+                form.style.display = "none";
+            }
+        }
+    </script>
+    
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/fontawesome-all.min.css') }}">
+        <noscript><link rel="stylesheet" href="{{ asset('css/noscript.css') }}"></noscript>
+        <style>
+            p,h1{
+                
+                text-align: center;
+            }
+        </style>
+    {% endblock %}
+{% endblock %}
+

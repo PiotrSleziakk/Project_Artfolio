@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project Artfolio - Lista wydarzeń{% endblock %}
+
+{% block content %}
+    <h1>Wydarzenia</h1>
+
+    {% if is_granted('ROLE_MODERATOR') %}
+        <a href="{{ path('app_event_new') }}" class="btn btn-primary mb-3">Stwórz nowe wydarzenie</a>
+    {% endif %}
+    
+    <div class="events">
+        <div class="row">
+            {% for event in events %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        {% if event.eventImage %}
+                            <img src="{{ asset('uploads/images/' ~ event.eventImage) }}" class="card-img-top" alt="{{ event.eventName }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ event.eventName }}</h5>
+                            <p class="card-text">{{ event.eventTopic }}</p>
+                            <p class="card-text"><small class="text-muted">{{ event.eventDate|date('Y-m-d H:i') }}</small></p>
+                             {% if is_granted('ROLE_MODERATOR') %}
+                                <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="btn btn-secondary">Edytuj</a>
+                                <a href="{{ path('app_event_delete', {'id': event.id}) }}" class="btn btn-danger"
+                                   onclick="return confirm('Czy na pewno chcesz usunąć to wydarzenie?');">Usuń</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>     
+            
+    
+{% endblock %}
